@@ -14,6 +14,8 @@ public class Defaults {
     public static final String DEF_JEDIS_MIN = "10";
     public static final String DEF_JEDIS_TOTAL = "1000";
     public static final String DEF_JEDIS_TIMEOUT = "2000";
+    // 默认锁过期时间30s
+    public static final String DEF_LOCK_TIMEOUT = "30000";
 
 
 }

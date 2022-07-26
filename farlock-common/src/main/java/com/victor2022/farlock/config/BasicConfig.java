@@ -2,11 +2,15 @@ package com.victor2022.farlock.config;
 
 import com.victor2022.farlock.consts.ConstStrings;
 import com.victor2022.farlock.exceptions.ConfigureNotFoundException;
+import com.victor2022.farlock.utils.PathUtils;
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -14,6 +18,8 @@ import java.util.Properties;
  * @date: 2022/07/26  上午11:44
  * @description: 全局配置
  */
+@EnableConfigurationProperties(BasicConfig.class)
+@ConfigurationProperties(prefix = ConstStrings.CONF_PREFIX)
 @Data
 public class BasicConfig {
 
@@ -68,12 +74,13 @@ public class BasicConfig {
      * @return: void
      * @author: victor2022
      * @date: 2022/7/26 下午5:31
-     * @description: TODO
+     * @description: 读取配置文件
      */
     private static void loadProperties(){
         // 读取文件，创建配置
-        InputStream is = BasicConfig.class.getResourceAsStream(ConstStrings.CONF_FILENAME);
+        FileInputStream is = null;
         try {
+            is = new FileInputStream(PathUtils.getConfigFilePath());
             Properties props = new Properties();
             props.load(is);
             properties = props;

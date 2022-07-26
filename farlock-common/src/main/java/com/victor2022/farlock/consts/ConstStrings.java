@@ -30,6 +30,7 @@ public class ConstStrings {
     public static final String CONF_JEDIS_MIN = "jedis.min";
     public static final String CONF_JEDIS_TOTAL = "jedis.total";
     public static final String CONF_JEDIS_TIMEOUT = "jedis.timeout";
+    public static final String CONF_LOCK_TIMEOUT = "lock.timeout";
 
 
 }
