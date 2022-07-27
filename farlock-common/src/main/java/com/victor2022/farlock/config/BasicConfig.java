@@ -1,16 +1,16 @@
 package com.victor2022.farlock.config;
 
-import com.victor2022.farlock.consts.ConstStrings;
+import com.victor2022.farlock.consts.Defaults;
+import com.victor2022.farlock.consts.Strings;
 import com.victor2022.farlock.exceptions.ConfigureNotFoundException;
+import com.victor2022.farlock.utils.IDUtils;
 import com.victor2022.farlock.utils.PathUtils;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -19,44 +19,23 @@ import java.util.Properties;
  * @description: 全局配置
  */
 @EnableConfigurationProperties(BasicConfig.class)
-@ConfigurationProperties(prefix = ConstStrings.CONF_PREFIX)
+@ConfigurationProperties(prefix = Strings.CONF_PREFIX)
 @Data
 public class BasicConfig {
 
     /**
      * @author: victor2022
      * @date: 2022/7/26 下午3:01
-     * @description: 锁中心IP地址
+     * @description: 锁中心类型
      */
-    protected String ip;
+    private static String centerType;
 
     /**
      * @author: victor2022
      * @date: 2022/7/26 下午3:01
-     * @description: 锁中心端口
+     * @description: 设备ID
      */
-    protected int port;
-
-    /**
-     * @author: victor2022
-     * @date: 2022/7/26 下午3:16
-     * @description: 最多连接数
-     */
-    protected int maxIdle;
-
-    /**
-     * @author: victor2022
-     * @date: 2022/7/26 下午3:17
-     * @description: 最少连接数
-     */
-    protected int minIdle;
-
-    /**
-     * @author: victor2022
-     * @date: 2022/7/26 下午4:20
-     * @description: 连接超时时间
-     */
-    protected int timeout;
+    private static long deviceId;
 
     /**
      * @author: victor2022
@@ -65,9 +44,24 @@ public class BasicConfig {
      */
     protected static Properties properties;
 
+    /**
+     * @author: victor2022
+     * @date: 2022/7/27 上午11:00
+     * @description: 非静态属性
+     */
+    protected String ip;
+    protected int port;
+    protected int maxIdle;
+    protected int minIdle;
+    protected int timeout;
+
+
     static{
         // 启动后读取配置文件
         loadProperties();
+        // 设置centerType和设备id，其余属性延迟到子类进行补充
+        centerType = properties.getProperty(Strings.CONF_TYPE, Defaults.DEF_TYPE);
+        deviceId = IDUtils.getRandomInt(Defaults.ID_BOUND);
     }
 
     /**
@@ -88,14 +82,13 @@ public class BasicConfig {
             throw new ConfigureNotFoundException();
         }
     }
-    /**
-     * @return: java.util.Properties
-     * @author: victor2022
-     * @date: 2022/7/26 下午4:24
-     * @description: 读取配置文件
-     */
+
     public static Properties getProperties(){
         return properties;
+    }
+    public static String getCenterType(){return centerType;}
+    public static long getDeviceId(){
+        return deviceId;
     }
 
 }

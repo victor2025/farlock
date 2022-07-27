@@ -6,7 +6,7 @@ package com.victor2022.farlock.locks;
  * @date: 2022/07/26  下午3:05
  * @description: 基于redis的锁抽象类
  */
-public abstract class RedisLock implements Lock {
+public class RedisLock implements Lock {
 
     private ThreadLocal<String> lockId = null;
 
@@ -18,5 +18,15 @@ public abstract class RedisLock implements Lock {
      */
     public boolean tryLock(){
         return true;
+    }
+
+    @Override
+    public void lock() {
+
+    }
+
+    @Override
+    public void unlock() {
+
     }
 }

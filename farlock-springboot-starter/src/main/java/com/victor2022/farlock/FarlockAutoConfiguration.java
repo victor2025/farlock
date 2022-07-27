@@ -22,6 +22,6 @@ public class FarlockAutoConfiguration {
 
     @Bean
     public FarlockFactory getFarlockFactory(){
-        return new FarlockFactory(config);
+        return FarlockFactory.getFarlockFactory();
     }
 }

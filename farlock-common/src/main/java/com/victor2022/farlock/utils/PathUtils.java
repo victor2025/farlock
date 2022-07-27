@@ -1,6 +1,6 @@
 package com.victor2022.farlock.utils;
 
-import com.victor2022.farlock.consts.ConstStrings;
+import com.victor2022.farlock.consts.Strings;
 
 /**
  * @author: victor2022
@@ -26,6 +26,6 @@ public class PathUtils {
      * @description: 获取配置文件路径
      */
     public static String getConfigFilePath(){
-        return getClassPath()+ ConstStrings.CONF_FILENAME;
+        return getClassPath()+ Strings.CONF_FILENAME;
     }
 }
