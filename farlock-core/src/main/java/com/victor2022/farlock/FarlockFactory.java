@@ -7,7 +7,6 @@ import com.victor2022.farlock.locks.Lock;
 import com.victor2022.farlock.utils.LockUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -77,7 +76,7 @@ public class FarlockFactory {
     private Lock createLock(String lockName) {
         Lock lock = null;
         try {
-            lock = lockType.getConstructor().newInstance(lockName);
+            lock = lockType.getConstructor(String.class).newInstance(lockName);
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {

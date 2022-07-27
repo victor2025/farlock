@@ -20,7 +20,7 @@ public class JedisPoolFactory {
      * @date: 2022/7/26 下午4:17
      * @description: 获取redis连接池 单例
      */
-    public JedisPool getPool() {
+    public static JedisPool getPool() {
         if(pool==null){
             synchronized (JedisPoolFactory.class){
                 if(pool==null){
@@ -37,7 +37,7 @@ public class JedisPoolFactory {
      * @date: 2022/7/26 上午11:23
      * @description: 根据配置创建连接池
      */
-    private JedisPool initPool(){
+    private static JedisPool initPool(){
         // 创建loader
         JedisConfigLoader loader = new JedisConfigLoader();
         // 获取poolConfig

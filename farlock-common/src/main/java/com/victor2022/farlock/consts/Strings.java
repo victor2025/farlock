@@ -10,7 +10,7 @@ public class Strings {
     /**
      * @description: 固定锁前缀
      */
-    public static final String LOCK_PREFIX = "farlock";
+    public static final String CONF_LOCK_PREFIX = "lockPrefix";
 
     /**
      * @description: 配置前缀

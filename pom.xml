@@ -12,6 +12,7 @@
         <module>farlock-common</module>
         <module>farlock-core</module>
         <module>farlock-springboot-starter</module>
+        <module>farlock-test</module>
     </modules>
 
     <properties>

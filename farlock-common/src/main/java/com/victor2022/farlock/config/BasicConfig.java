@@ -47,13 +47,11 @@ public class BasicConfig {
     /**
      * @author: victor2022
      * @date: 2022/7/27 上午11:00
-     * @description: 非静态属性
+     * @description: 非静态公有属性，在具体配置中加载
      */
     protected String ip;
     protected int port;
-    protected int maxIdle;
-    protected int minIdle;
-    protected int timeout;
+
 
 
     static{

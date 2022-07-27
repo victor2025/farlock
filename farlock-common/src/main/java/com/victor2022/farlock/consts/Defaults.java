@@ -16,6 +16,7 @@ public class Defaults {
     public static final String DEF_JEDIS_TIMEOUT = "2000";
     // 默认锁过期时间30s
     public static final String DEF_LOCK_TIMEOUT = "30000";
+    public static final String DEF_LOCK_PREFIX = "farlock";
 
     public static final String DEF_TYPE = Strings.TYPE_REDIS;
 

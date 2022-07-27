@@ -14,9 +14,10 @@ import redis.clients.jedis.JedisPoolConfig;
 @Data
 public class JedisConfigLoader extends BasicConfig {
 
-    // 最大总连接数
-    private Integer maxTotal;
-    private Long lockTimeout;
+    private int maxTotal;
+    private int maxIdle;
+    private int minIdle;
+    private int timeout;
 
     /**
      * @return: redis.clients.jedis.JedisPoolConfig
@@ -49,8 +50,6 @@ public class JedisConfigLoader extends BasicConfig {
             this.maxIdle = Integer.parseInt(properties.getProperty(Strings.CONF_JEDIS_MAX,Defaults.DEF_JEDIS_MAX));
             this.minIdle = Integer.parseInt(properties.getProperty(Strings.CONF_JEDIS_MIN,Defaults.DEF_JEDIS_MIN));
             this.timeout = Integer.parseInt(properties.getProperty(Strings.CONF_JEDIS_TIMEOUT,Defaults.DEF_JEDIS_TIMEOUT));
-            this.lockTimeout=Long.parseLong(properties.getProperty(Strings.CONF_LOCK_TIMEOUT,Defaults.DEF_LOCK_TIMEOUT));
-            // 当前独有
             this.maxTotal = Integer.parseInt(properties.getProperty(Strings.CONF_JEDIS_TOTAL,Defaults.DEF_JEDIS_TOTAL));
         }catch (Exception e){
             throw new ConfigureException();

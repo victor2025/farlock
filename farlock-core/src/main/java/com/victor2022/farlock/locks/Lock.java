@@ -8,6 +8,6 @@ package com.victor2022.farlock.locks;
 public interface Lock {
 
     public void lock();
-
+    public void lock(long timeout);
     public void unlock();
 }
