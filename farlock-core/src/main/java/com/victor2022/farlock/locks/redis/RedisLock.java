@@ -1,9 +1,10 @@
-package com.victor2022.farlock.locks;
+package com.victor2022.farlock.locks.redis;
 
 
 import com.victor2022.farlock.config.RedisLockConfig;
+import com.victor2022.farlock.consts.Defaults;
+import com.victor2022.farlock.locks.Lock;
 import com.victor2022.farlock.utils.IDUtils;
-import com.victor2022.farlock.utils.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +39,7 @@ public class RedisLock implements Lock {
      * @description: 尝试加锁
      */
     private boolean tryLock(String id){
-        return RedisUtils.callForLock(this.keyName,id,RedisLockConfig.getLockTimeout());
+        return RedisLockHandler.callForLock(this.keyName,id,RedisLockConfig.getLockTimeout());
     }
 
     /**
@@ -50,7 +51,7 @@ public class RedisLock implements Lock {
      * @description: 带超时加锁
      */
     private boolean tryLock(String id, long timeout){
-        return RedisUtils.callForLock(this.keyName,id,timeout);
+        return RedisLockHandler.callForLock(this.keyName,id,timeout);
     }
 
     /**
@@ -61,9 +62,15 @@ public class RedisLock implements Lock {
      * @description: 尝试解锁
      */
     private boolean tryUnlock(String id){
-        return RedisUtils.callForUnlock(this.lockName,id);
+        return RedisLockHandler.callForUnlock(this.keyName,id);
     }
 
+    /**
+     * @return: java.lang.String
+     * @author: victor2022
+     * @date: 2022/7/28 上午10:21
+     * @description: 获取线程的锁id
+     */
     private String getLockId(){
         Thread t = Thread.currentThread();
         String id = idMap.get(t);
@@ -98,7 +105,7 @@ public class RedisLock implements Lock {
     public void lock(long timeout) {
         String id = getLockId();
         if(timeout<=1000){
-            logger.warn("Lock expire time is too short, use default value!");
+            logger.warn("Lock expire time is too short, use default value: "+ Defaults.DEF_LOCK_TIMEOUT);
             lock();
         }else{
             while(!tryLock(id,timeout)){}

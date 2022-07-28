@@ -62,7 +62,6 @@ public class IDUtils {
         if(snowflakeIdWorker==null){
             synchronized (IDUtils.class){
                 if(snowflakeIdWorker==null){
-                    System.out.println(BasicConfig.getDeviceId());
                     snowflakeIdWorker = new SnowflakeIdWorker(BasicConfig.getDeviceId(),0);
                 }
             }

@@ -2,7 +2,7 @@ package com.victor2022.farlock.utils;
 
 import com.victor2022.farlock.consts.Strings;
 import com.victor2022.farlock.exceptions.LockException;
-import com.victor2022.farlock.locks.RedisLock;
+import com.victor2022.farlock.locks.redis.RedisLock;
 
 /**
  * @author: victor2022
