@@ -1,4 +1,4 @@
-package com.victor2022.farlock.lock;
+package com.victor2022.farlock.locktest;
 
 import com.victor2022.farlock.factory.FarlockFactory;
 import com.victor2022.farlock.locks.Lock;
@@ -12,10 +12,10 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @author: victor2022
  * @date: 2022/07/28  下午3:30
- * @description:
+ * @description: 测试多线程场景加锁解锁
  */
-@Component
-public class LockTest implements InitializingBean {
+//@Component
+public class MultiThreadTest implements InitializingBean {
 
     @Autowired
     private FarlockFactory lockFactory;
@@ -35,7 +35,6 @@ public class LockTest implements InitializingBean {
                 while (goods.getCnt() > 0) {
                     // 加锁
                     lock.lock();
-                    timer.toc();
                     // 扣减库存
                     int cnt = goods.decr();
                     if (vis[cnt]) {
@@ -56,7 +55,7 @@ public class LockTest implements InitializingBean {
         // 等待所有线程结束
         latch.await();
         timer.toc();
-        System.out.println("done");
+        System.out.println("Multi-thread test is done...");
     }
 
     class Goods {

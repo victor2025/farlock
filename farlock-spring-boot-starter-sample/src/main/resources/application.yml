@@ -1,5 +1,7 @@
 spring:
   farlock:
     center-type: redis
-    ip: 127.0.0.1
+    ip: localhost
     port: 6379
+    min-idle: 500
+    max-idle: 1000

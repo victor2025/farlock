@@ -1,6 +1,8 @@
 package com.victor2022.farlock.pool;
 
 import com.victor2022.farlock.config.loaders.JedisConfigLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -10,6 +12,8 @@ import redis.clients.jedis.JedisPoolConfig;
  * @description: 获取Jedis连接池
  */
 public class JedisPoolFactory {
+
+    private static Logger logger = LoggerFactory.getLogger(JedisPoolFactory.class);
 
     // 单例连接池
     public volatile static JedisPool pool = null;
@@ -42,6 +46,7 @@ public class JedisPoolFactory {
         JedisPoolConfig poolConfig = JedisConfigLoader.getPoolConfig();
         // 创建JedisPool
         JedisPool pool = new JedisPool(poolConfig,JedisConfigLoader.getIp(),JedisConfigLoader.getPort(),JedisConfigLoader.getTimeout());
+        logger.info("Initializing Jedis pool at "+JedisConfigLoader.getIp()+":"+JedisConfigLoader.getPort());
         return pool;
     }
 

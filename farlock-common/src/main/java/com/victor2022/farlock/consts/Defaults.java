@@ -10,8 +10,8 @@ public class Defaults {
     public static final String DEF_IP = "127.0.0.1";
     // jedis相关
     public static final String DEF_JEDIS_PORT = "6379";
-    public static final String DEF_JEDIS_MAX = "100";
-    public static final String DEF_JEDIS_MIN = "10";
+    public static final String DEF_JEDIS_MAX = "500";
+    public static final String DEF_JEDIS_MIN = "100";
     public static final String DEF_JEDIS_TOTAL = "1000";
     public static final String DEF_JEDIS_TIMEOUT = "2000";
     // 默认锁过期时间30s
