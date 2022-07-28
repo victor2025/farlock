@@ -1,6 +1,6 @@
 package com.victor2022.farlock;
 
-import com.victor2022.farlock.config.BasicConfig;
+import com.victor2022.farlock.config.FarlockConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -13,15 +13,15 @@ import org.springframework.context.annotation.Configuration;
  * @description:
  */
 @Configuration
-@EnableConfigurationProperties(BasicConfig.class)
+@EnableConfigurationProperties(FarlockConfig.class)
 @ConditionalOnClass(FarlockFactory.class)
 public class FarlockAutoConfiguration {
 
     @Autowired
-    private BasicConfig config;
+    private FarlockConfig config;
 
     @Bean
     public FarlockFactory getFarlockFactory(){
-        return FarlockFactory.getFarlockFactory();
+        return FarlockFactory.getFarlockFactory(config);
     }
 }

@@ -1,7 +1,8 @@
 package com.victor2022.farlock;
 
 import com.mysql.cj.util.StringUtils;
-import com.victor2022.farlock.config.BasicConfig;
+import com.victor2022.farlock.config.ConfigHolder;
+import com.victor2022.farlock.config.FarlockConfig;
 import com.victor2022.farlock.exceptions.LockException;
 import com.victor2022.farlock.locks.Lock;
 import com.victor2022.farlock.utils.LockUtils;
@@ -17,14 +18,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class FarlockFactory {
 
+    // 锁工厂实例
     private static volatile FarlockFactory lockFactory = null;
+    // 配置对象
+    private static ConfigHolder configHolder = null;
+    // 锁类型
     private Class<Lock> lockType = null;
     // 锁放入map中进行等待
     private volatile Map<String, Lock> lockMap = new ConcurrentHashMap<>();
 
-    private FarlockFactory() {
-        lockType = LockUtils.getClassByCenterType(BasicConfig.getCenterType());
-    }
+    private FarlockFactory() {}
 
     /**
      * @return: com.victor2022.farlock.FarlockFactory
@@ -33,13 +36,57 @@ public class FarlockFactory {
      * @description: 单例获取锁工厂
      */
     public static FarlockFactory getFarlockFactory(){
+        return getOrCreateFactory(null);
+    }
+
+    /**
+     * @param config:
+     * @return: com.victor2022.farlock.FarlockFactory
+     * @author: victor2022
+     * @date: 2022/7/28 下午1:24
+     * @description: 单例获取锁工厂，判断是否为Spring创建
+     */
+    public static FarlockFactory getFarlockFactory(FarlockConfig config){
+        return getOrCreateFactory(config);
+    }
+
+    /**
+     * @param config:
+     * @return: com.victor2022.farlock.FarlockFactory
+     * @author: victor2022
+     * @date: 2022/7/28 下午1:25
+     * @description: 获取锁工厂内部方法
+     */
+    private static FarlockFactory getOrCreateFactory(FarlockConfig config){
         if(lockFactory==null){
             synchronized (FarlockFactory.class){
                 if(lockFactory==null){
-                    lockFactory = new FarlockFactory();
+                    lockFactory = initLockFactory(config);
                 }
             }
         }
+        return lockFactory;
+    }
+
+    /**
+     * @return: void
+     * @author: victor2022
+     * @date: 2022/7/28 下午12:46
+     * @description: 初始化lockFactory
+     * TODO
+     */
+    private static FarlockFactory initLockFactory(FarlockConfig config){
+        // 初始化
+        if(config==null){
+            // 默认初始化
+            FarlockFactory.configHolder = new ConfigHolder();
+        }else{
+            // 按照配置初始化
+            FarlockFactory.configHolder = new ConfigHolder(config);
+        }
+        // 创建lockFactory
+        lockFactory = new FarlockFactory();
+        lockFactory.lockType = LockUtils.getClassByCenterType(configHolder.getConfig().getCenterType());
         return lockFactory;
     }
 

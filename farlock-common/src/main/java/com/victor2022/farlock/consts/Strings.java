@@ -15,7 +15,7 @@ public class Strings {
     /**
      * @description: 配置前缀
      */
-    public static final String CONF_PREFIX = "farlock";
+    public static final String CONF_PREFIX = "spring.farlock";
 
     /**
      * @description: 配置文件名
@@ -29,6 +29,7 @@ public class Strings {
     public static final String CONF_IP = "ip";
     public static final String CONF_PORT = "port";
     public static final String CONF_TYPE = "type";
+    public static final String CONF_DEVICE_ID = "id";
     // jedis相关配置
     public static final String CONF_JEDIS_MAX = "jedis.max";
     public static final String CONF_JEDIS_MIN = "jedis.min";

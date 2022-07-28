@@ -1,9 +1,7 @@
 package com.victor2022.farlock.utils;
 
-import com.victor2022.farlock.config.BasicConfig;
+import com.victor2022.farlock.config.ConfigHolder;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -62,7 +60,7 @@ public class IDUtils {
         if(snowflakeIdWorker==null){
             synchronized (IDUtils.class){
                 if(snowflakeIdWorker==null){
-                    snowflakeIdWorker = new SnowflakeIdWorker(BasicConfig.getDeviceId(),0);
+                    snowflakeIdWorker = new SnowflakeIdWorker(ConfigHolder.getConfig().getDeviceId(), 0);
                 }
             }
         }

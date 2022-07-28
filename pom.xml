@@ -11,7 +11,7 @@
     <modules>
         <module>farlock-common</module>
         <module>farlock-core</module>
-        <module>farlock-springboot-starter</module>
+        <module>farlock-spring-boot-starter</module>
         <module>farlock-sample</module>
     </modules>
 
@@ -21,7 +21,7 @@
         <jedis.version>3.7.1</jedis.version>
         <lombok.version>1.18.8</lombok.version>
         <springboot.version>2.6.2</springboot.version>
-        <druid.version>1.2.6</druid.version>
+        <druid.version>1.2.7</druid.version>
         <mysql-connector.version>8.0.26</mysql-connector.version>
         <slf4j.version>1.7.25</slf4j.version>
     </properties>

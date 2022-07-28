@@ -1,7 +1,7 @@
 package com.victor2022.farlock.locks.redis;
 
 
-import com.victor2022.farlock.config.RedisLockConfig;
+import com.victor2022.farlock.config.loaders.RedisLockConfigLoader;
 import com.victor2022.farlock.consts.Defaults;
 import com.victor2022.farlock.locks.Lock;
 import com.victor2022.farlock.utils.IDUtils;
@@ -29,7 +29,7 @@ public class RedisLock implements Lock {
 
     private void initLock(String lockName){
         this.lockName = lockName;
-        this.keyName = RedisLockConfig.getLockPrefix() +":"+lockName;
+        this.keyName = RedisLockConfigLoader.getLockPrefix() +":"+lockName;
     }
 
     /**
@@ -39,7 +39,7 @@ public class RedisLock implements Lock {
      * @description: 尝试加锁
      */
     private boolean tryLock(String id){
-        return RedisLockHandler.callForLock(this.keyName,id,RedisLockConfig.getLockTimeout());
+        return RedisLockHandler.callForLock(this.keyName,id, RedisLockConfigLoader.getLockTimeout());
     }
 
     /**
