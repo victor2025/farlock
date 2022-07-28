@@ -1,6 +1,6 @@
 package com.victor2022.farlock.lock;
 
-import com.victor2022.farlock.FarlockFactory;
+import com.victor2022.farlock.factory.FarlockFactory;
 import com.victor2022.farlock.locks.Lock;
 
 /**
@@ -11,7 +11,7 @@ import com.victor2022.farlock.locks.Lock;
 public class LockAndUnlock {
 
     public static void main(String[] args) {
-        Lock myLock = FarlockFactory.getFarlockFactory().getLock("myLock");
+        Lock myLock = FarlockFactory.getLockFactory().getLock("myLock");
         for(int i = 0; i<10; i++){
             myLock.lock(1000000l);
         }

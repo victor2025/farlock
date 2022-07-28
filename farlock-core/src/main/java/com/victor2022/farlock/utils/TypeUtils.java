@@ -9,7 +9,7 @@ import com.victor2022.farlock.locks.redis.RedisLock;
  * @date: 2022/7/27 上午11:22
  * @description:
  */
-public class LockUtils {
+public class TypeUtils {
 
     /**
      * @param centerType:
@@ -18,7 +18,7 @@ public class LockUtils {
      * @date: 2022/7/27 上午11:26
      * @description: 由centerType获取class对象
      */
-    public static Class getClassByCenterType(String centerType){
+    public static Class getLockClassByCenterType(String centerType){
         if(centerType.equals(Strings.TYPE_REDIS)){
             return RedisLock.class;
         }else if(centerType.equals(Strings.TYPE_ZK)){

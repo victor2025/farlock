@@ -1,6 +1,6 @@
 package com.victor2022.farlock.lock;
 
-import com.victor2022.farlock.FarlockFactory;
+import com.victor2022.farlock.factory.FarlockFactory;
 import com.victor2022.farlock.locks.Lock;
 import com.victor2022.farlock.utils.TimeUtils;
 import org.springframework.beans.factory.InitializingBean;

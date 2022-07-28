@@ -1,13 +1,12 @@
 package com.victor2022.farlock.buy;
 
-import com.victor2022.farlock.FarlockFactory;
+import com.victor2022.farlock.factory.FarlockFactory;
 import com.victor2022.farlock.locks.Lock;
 import com.victor2022.farlock.utils.TimeUtils;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author: victor2022
@@ -20,7 +19,7 @@ public class BuyWithFarLock {
 
     public static void main(String[] args) throws InterruptedException {
         Goods goods = new Goods();
-        Lock lock = FarlockFactory.getFarlockFactory().getLock("myLock");
+        Lock lock = FarlockFactory.getLockFactory().getLock("myLock");
         boolean[] vis = new boolean[goods.cnt+1];
         // 用于计时
         TimeUtils.Timer timer = TimeUtils.getTimer();

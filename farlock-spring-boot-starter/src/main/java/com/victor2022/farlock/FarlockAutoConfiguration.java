@@ -1,6 +1,7 @@
 package com.victor2022.farlock;
 
 import com.victor2022.farlock.config.FarlockConfig;
+import com.victor2022.farlock.factory.FarlockFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,6 +23,6 @@ public class FarlockAutoConfiguration {
 
     @Bean
     public FarlockFactory getFarlockFactory(){
-        return FarlockFactory.getFarlockFactory(config);
+        return FarlockFactory.getLockFactory(config);
     }
 }

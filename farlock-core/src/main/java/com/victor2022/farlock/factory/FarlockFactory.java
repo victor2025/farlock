@@ -1,11 +1,11 @@
-package com.victor2022.farlock;
+package com.victor2022.farlock.factory;
 
 import com.mysql.cj.util.StringUtils;
 import com.victor2022.farlock.config.ConfigHolder;
 import com.victor2022.farlock.config.FarlockConfig;
 import com.victor2022.farlock.exceptions.LockException;
 import com.victor2022.farlock.locks.Lock;
-import com.victor2022.farlock.utils.LockUtils;
+import com.victor2022.farlock.utils.TypeUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -25,34 +25,34 @@ public class FarlockFactory {
     // 锁类型
     private Class<Lock> lockType = null;
     // 锁放入map中进行等待
-    private volatile Map<String, Lock> lockMap = new ConcurrentHashMap<>();
+    private volatile Map<String, Lock> lockCache = new ConcurrentHashMap<>();
 
     private FarlockFactory() {}
 
     /**
-     * @return: com.victor2022.farlock.FarlockFactory
+     * @return: com.victor2022.farlock.factory.FarlockFactory
      * @author: victor2022
      * @date: 2022/7/27 上午11:05
      * @description: 单例获取锁工厂
      */
-    public static FarlockFactory getFarlockFactory(){
+    public static FarlockFactory getLockFactory(){
         return getOrCreateFactory(null);
     }
 
     /**
      * @param config:
-     * @return: com.victor2022.farlock.FarlockFactory
+     * @return: com.victor2022.farlock.factory.FarlockFactory
      * @author: victor2022
      * @date: 2022/7/28 下午1:24
      * @description: 单例获取锁工厂，判断是否为Spring创建
      */
-    public static FarlockFactory getFarlockFactory(FarlockConfig config){
+    public static FarlockFactory getLockFactory(FarlockConfig config){
         return getOrCreateFactory(config);
     }
 
     /**
      * @param config:
-     * @return: com.victor2022.farlock.FarlockFactory
+     * @return: com.victor2022.farlock.factory.FarlockFactory
      * @author: victor2022
      * @date: 2022/7/28 下午1:25
      * @description: 获取锁工厂内部方法
@@ -73,7 +73,6 @@ public class FarlockFactory {
      * @author: victor2022
      * @date: 2022/7/28 下午12:46
      * @description: 初始化lockFactory
-     * TODO
      */
     private static FarlockFactory initLockFactory(FarlockConfig config){
         // 初始化
@@ -86,7 +85,7 @@ public class FarlockFactory {
         }
         // 创建lockFactory
         lockFactory = new FarlockFactory();
-        lockFactory.lockType = LockUtils.getClassByCenterType(configHolder.getConfig().getCenterType());
+        lockFactory.lockType = TypeUtils.getLockClassByCenterType(configHolder.getConfig().getCenterType());
         return lockFactory;
     }
 
@@ -101,12 +100,12 @@ public class FarlockFactory {
         if(StringUtils.isNullOrEmpty(lockName))throw new LockException("Lock name is invalid!");
         // 从map中获取对应名称的锁
         // 若map中没有，则创建一个
-        Lock lock = lockMap.get(lockName);
+        Lock lock = lockCache.get(lockName);
         if(lock==null){
             synchronized (FarlockFactory.class){
                 if(lock==null){
                     lock = createLock(lockName);
-                    lockMap.put(lockName,lock);
+                    lockCache.put(lockName,lock);
                 }
             }
         }

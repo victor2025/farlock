@@ -8,6 +8,6 @@ package com.victor2022.farlock.exceptions;
 public class VictorException extends RuntimeException{
     @Override
     public String getMessage() {
-        return "Inner exception";
+        return "Inner exception of farlock!!!";
     }
 }

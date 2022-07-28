@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author: victor2022
  * @date: 2022/07/26  下午3:05
- * @description: 基于redis的锁抽象类
+ * @description: 基于redis的分布式锁
  */
 public class RedisLock implements Lock {
 
