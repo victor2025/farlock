@@ -14,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
  * @date: 2022/07/28  下午3:30
  * @description: 测试多线程场景加锁解锁
  */
-//@Component
+@Component
 public class MultiThreadTest implements InitializingBean {
 
     @Autowired
@@ -37,6 +37,7 @@ public class MultiThreadTest implements InitializingBean {
                     lock.lock();
                     // 扣减库存
                     int cnt = goods.decr();
+                    System.out.println(goods.getCnt());
                     if (vis[cnt]) {
                         System.out.println("HIT!!!->" + cnt);
                     } else {

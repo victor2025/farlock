@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: mysql-connector-java-8.0.26.jar druid-1.2.7.jar spring-aop-5
+ .3.14.jar spring-beans-5.3.14.jar spring-expression-5.3.14.jar spring-j
+ cl-5.3.14.jar spring-boot-2.6.2.jar lombok-1.18.8.jar spring-context-5.
+ 3.14.jar slf4j-api-1.7.30.jar javax.annotation-api-1.3.2.jar protobuf-j
+ ava-3.11.4.jar jedis-3.7.1.jar spring-boot-configuration-processor-2.6.
+ 2.jar commons-pool2-2.10.0.jar spring-boot-autoconfigure-2.6.2.jar spri
+ ng-core-5.3.14.jar
+

@@ -5,3 +5,4 @@ spring:
     port: 6379
     min-idle: 500
     max-idle: 1000
+    lock-timeout: 3000

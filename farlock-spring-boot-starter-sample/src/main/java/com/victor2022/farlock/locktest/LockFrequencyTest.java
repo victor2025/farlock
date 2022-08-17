@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @date: 2022/7/28 下午9:52
  * @description: 测试最大加锁解锁频率
  */
-@Component
+//@Component
 public class LockFrequencyTest implements InitializingBean {
 
     @Autowired
